@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecánicoYa</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background: #000;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: green;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚗 MecánicoYa</h1>
+    <p>Encuentra mecánicos cerca de ti</p>
+</header>
+
+<div class="container">
+
+    <input type="text" placeholder="¿Qué problema tiene tu auto?">
+    <button>Buscar</button>
+
+    <div class="card">
+        <h3>Juan Mecánico</h3>
+        <p>📍 Antofagasta</p>
+        <p>🔧 Servicio: A domicilio</p>
+        <p>💰 Desde: $25.000</p>
+        <a class="btn" href="https://wa.me/56911111111">Contactar</a>
+    </div>
+
+    <div class="card">
+        <h3>Taller López</h3>
+        <p>📍 Antofagasta</p>
+        <p>🔧 Servicio: Taller</p>
+        <p>💰 Desde: $30.000</p>
+        <a class="btn" href="https://wa.me/56922222222">Contactar</a>
+    </div>
+
+</div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MecánicoYa</title>
+
+<style>
+body { font-family: Arial; margin: 0; background: #f4f4f4; }
+header { background: #000; color: #fff; padding: 15px; text-align: center; }
+.container { padding: 20px; }
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 8px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: green;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚗 MecánicoYa</h1>
+<p>Encuentra o publica servicios mecánicos</p>
+</header>
+
+<div class="container">
+
+<h2>🔧 Registrar mecánico</h2>
+
+<input id="nombre" placeholder="Nombre">
+<input id="ciudad" placeholder="Ciudad">
+<input id="servicio" placeholder="Tipo (domicilio o taller)">
+<input id="precio" placeholder="Precio base">
+<input id="whatsapp" placeholder="WhatsApp (ej: 569XXXXXXXX)">
+<button onclick="guardar()">Registrar</button>
+
+<h2>📋 Mecánicos disponibles</h2>
+<div id="lista"></div>
+
+</div>
+
+<script>
+let mecanicos = JSON.parse(localStorage.getItem("mecanicos")) || [];
+
+function mostrar() {
+    let lista = document.getElementById("lista");
+    lista.innerHTML = "";
+
+    mecanicos.forEach(m => {
+        lista.innerHTML += `
+        <div class="card">
+            <h3>${m.nombre}</h3>
+            <p>📍 ${m.ciudad}</p>
+            <p>🔧 ${m.servicio}</p>
+            <p>💰 ${m.precio}</p>
+            <a class="btn" href="https://wa.me/${m.whatsapp}">Contactar</a>
+        </div>
+        `;
+    });
+}
+
+function guardar() {
+    let nuevo = {
+        nombre: document.getElementById("nombre").value,
+        ciudad: document.getElementById("ciudad").value,
+        servicio: document.getElementById("servicio").value,
+        precio: document.getElementById("precio").value,
+        whatsapp: document.getElementById("whatsapp").value
+    };
+
+    mecanicos.push(nuevo);
+    localStorage.setItem("mecanicos", JSON.stringify(mecanicos));
+
+    mostrar();
+}
+
+mostrar();
+</script>
+
+</body>
+</html>
