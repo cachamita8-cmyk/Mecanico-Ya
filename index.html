@@ -1,4 +1,51 @@
 
+
+<header>
+<h1>🚗 MecánicosYa</h1>
+<p>Encuentra o publica servicios mecánicos</p>
+</header>
+
+<div class="container">
+
+<h2>🔧 Registrar mecánico</h2>
+
+<input id="nombre" placeholder="Nombre">
+<input id="ciudad" placeholder="Ciudad">
+<input id="servicio" placeholder="Tipo (domicilio o taller)">
+<input id="precio" placeholder="Precio base">
+<input id="whatsapp" placeholder="WhatsApp (ej: 569XXXXXXXX)">
+<button onclick="guardar()">Registrar</button>
+
+<h2>📋 Mecánicos disponibles</h2>
+<div id="lista"></div>
+
+</div>
+
+<script>
+let mecanicos = JSON.parse(localStorage.getItem("mecanicos")) || [];
+
+function mostrar() {
+    let lista = document.getElementById("lista");
+    lista.innerHTML = "";
+
+    mecanicos.forEach(m => {
+        lista.innerHTML += `
+        <div class="card">
+            <h3>${m.nombre}</h3>
+            <p>📍 ${m.ciudad}</p>
+            <p>🔧 ${m.servicio}</p>
+            <p>💰 ${m.precio}</p>
+            <a class="btn" href="https://wa.me/${m.whatsapp}">Contactar</a>
+        </div>
+        `;
+    });
+}
+
+function guardar() {
+    let nuevo = {
+        nombre: document.getElementById("nombre").value,
+        ciudad: document.getElementById("ciudad").value,
+        servicio: document.getElementById("servicio").value,
         precio: document.getElementById("precio").value,
         whatsapp: document.getElementById("whatsapp").value
     };
